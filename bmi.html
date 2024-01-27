@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI CALCULATOR</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .containor {
+            padding: 10vh 39vw;
+            margin: 100px;
+        }
+
+        .input-container {
+            margin: 10px;
+            padding: 10px;
+        }
+
+        label {
+            line-height: 44px;
+        }
+
+        #btn {
+            margin: 20px;
+            padding: 10px;
+            border-radius: 16px;
+            background-color:lightgreen;
+            cursor: pointer;
+        }
+        #btn:hover{
+            background-color:lightskyblue;
+        }
+        h1{
+            font-size: 22px;
+        }
+        #weight
+        {
+            padding:10px;
+        }
+        #height
+        {
+            padding:10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="containor">
+        <h1>BMI CALCULATOR</h1>
+        <div class="input-container">
+            <label for="height">HEIGHT:</label><br>
+            <input type="number" id="height" placeholder="height (cm)" name="number" required>
+        </div>
+        <div class="input-container">
+            <label for="weight">WEIGHT:</label><br>
+            <input type="number" id="weight" placeholder="weight (kg)" name="number" required>
+        </div>
+        <button id="btn" onclick="calculateBMI()">CALCULATE</button><br>
+        <div id="result"></div>
+    </div>
+</body>
+<script>
+    var resultDiv=document.getElementById("result");
+    resultDiv.innerHTML="";
+
+    function calculateBMI()
+    {
+        
+        var heightInput=document.getElementById("height");
+        var weightInput=document.getElementById("weight");
+        
+        var height=parseFloat(heightInput.value);
+        var weight=parseFloat(weightInput.value);
+        if(isNaN(height)||isNaN(weight))
+        {
+            resultDiv.innerHTML="please Enter both height and weight";
+            return;
+        }  
+        var bmi=(weight/((height*height)/10000)).toFixed(2);
+        var category="";
+        if(bmi<18.5)
+        {
+            category="underweight";
+        }else if(bmi<25)
+        {
+            category="Normal Weight";
+        }
+        else if(bmi<30)
+        {
+            category="Overweight";
+        }else 
+        {
+            category="obese";
+        }
+        resultDiv.innerHTML="YOUR BMI IS "+bmi+"("+ category+")";
+    }
+</script>
+</html>
